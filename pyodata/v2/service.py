@@ -7,6 +7,7 @@
 # pylint: disable=too-many-lines
 
 import logging
+import sys
 from functools import partial
 import json
 import random
@@ -139,7 +140,7 @@ class ODataHttpResponse:
         return ODataHttpResponse(
             dict(response.getheaders()),
             response.status,
-            response.read(len(data))  # the len here will give a 'big enough' value to read the whole content
+            response.read(sys.getsizeof(data))  # the getsizeof here will actually give a 'big enough' value to read the whole content
         )
 
     def json(self):
